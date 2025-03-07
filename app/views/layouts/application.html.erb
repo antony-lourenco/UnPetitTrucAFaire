@@ -20,12 +20,23 @@
 
 <body>
 
-  <nav class="header-nav">
-    <div class="alerts-container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
-    <%= link_to "New Event", new_event_path %>
+  <nav class="header-nav-container">
+    <div class="header-nav">
+      <%if current_user%>
+      Bienvenue titulaire de l'email : <strong><%= current_user.email %></strong> !
+      <%else%>
+      Pas connecté, clique sur "Login"
+      <%end%>
+      <div class="alerts-container">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+      <% if current_user %>
+      <%= link_to "Se déconnecter", destroy_user_session_path, data: { turbo_method: :delete }, class: "danger" %>
+      <%else%>
+      <%= link_to "Login", new_user_session_path %>
+      <%end%>
+      <%= link_to "Créer un événement", new_event_path %>
   </nav>
   <%= yield %>
 </body>

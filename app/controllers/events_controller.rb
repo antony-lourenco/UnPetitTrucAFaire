@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: %i[index]
-  before_action :set_event, only: %i[show edit update delete]
+  skip_before_action :authenticate_user!, only: %i[index] # on laisse les gens voir un ptit peu quoi
+  before_action :set_event, only: %i[show edit update destroy]
 
   def index
     @events = Event.all
@@ -32,14 +32,15 @@ class EventsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @event.destroy
+    redirect_to events_path
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :date, :location)
+    params.require(:event).permit(:title, :description, :date, :location, :user_id)
   end
 
   def set_event

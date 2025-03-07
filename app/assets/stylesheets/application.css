@@ -4,10 +4,13 @@
 }
 
 .header-nav {
+  padding: 15px;
   display: flex;
   justify-content: end;
   align-items: center;
-  padding: 15px;
+}
+
+.header-nav-container {
   position: fixed;
   transform: translate(-50%, 0);
   left: 50%;
@@ -16,11 +19,31 @@
   background-color: rgb(33, 33, 33);
 }
 
-a {
-  color: aquamarine;
-  padding: 5px;
-  background-color: rgba(173, 216, 230, 0.1);
+.actions input, a, button {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  padding: 0 15px;
   border-radius: 4px;
+  background: linear-gradient(45deg, rgb(76, 132, 228), rgb(6, 221, 157));
+  min-height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-decoration: none;
+  min-width: 75px;
+  appearance: none;
+  border: none;
+  text-align: center;
+  margin: 5px;
+}
+
+.actions input.danger, a.danger, button.danger {
+  background: linear-gradient(45deg, pink, rgb(210, 7, 108));
+}
+
+
+.actions input.neutral, a.neutral, button.neutral {
+  background: linear-gradient(45deg, rgb(128, 128, 128), rgb(198, 181, 189));
+  color: black;
 }
 
 html {
@@ -31,7 +54,7 @@ html {
 body {
   margin: 0;
   padding-top: 80px;
-  background: black;
+  background: rgb(12, 7, 7);
   color: lightgrey;
   max-width: 900px;
   margin: auto;
@@ -39,4 +62,31 @@ body {
 
 .alerts-container {
   margin: auto;
+}
+
+.field {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.field input:not([type="checkbox"]), .field textarea {
+  min-height: 40px;
+  appearance: none;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 5px inset rgba(0, 0, 0, 0.152);
+  padding: 5px;
+}
+
+.event-card {
+  padding: 15px;
+  border-radius: 25px;
+  border: 1px solid lightblue;
+  margin: 25px;
+}
+
+.event-card-actions {
+  display: flex;
+  justify-content: space-between;
 }

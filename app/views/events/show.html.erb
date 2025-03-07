@@ -1,9 +1,13 @@
-<div>
-  <%= @event.title %>
-  <%= @event.description %>
-  <%= @event.date %>
-  <%= @event.location %>
-  <%= link_to "Back", events_path %>
-  <%= button_to "Delete", @event, method: :delete %>
-  <%= link_to "Edit", edit_article_path(@event.id)%>
+<%= link_to "Retour", events_path, class: "neutral" %>
+<div class="event-card">
+  <div>
+    <h2><%= @event.title %></h2>
+    <div>Description: <%= @event.description %></div>
+    <div>Date: <%= formatted_date(@event.date.to_s) %></div>
+    <div>Lieu : <%= @event.location %></div>
+  </div>
+  <div class="event-card-actions">
+    <%= link_to "Editer", edit_event_path(@event.id)%>
+    <%= button_to "Supprimer", @event, method: :delete, class: "danger" %>
+  </div>
 </div>
