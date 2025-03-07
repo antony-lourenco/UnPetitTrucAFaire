@@ -2,7 +2,9 @@
   <h1>Événements à venir:</h1>
 
   <% if @events.length > 0 %>
-  <ul>
+  <ul class="per-user-list-container"></ul>
+  <div class="per-user-list-empty">Vous n'avez créé aucun évenements</div>
+  <ul class="global-list-container">
     <% @events.each do |event|%>
     <li>
       <%= event.title %> - <%= formatted_date(event.date.to_s) %>
@@ -15,3 +17,41 @@
   clique sur "Créer un événement" ou "Login" pour en créer.
   <%end%>
 </div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    document.querySelector("[data-turbo-method='get']").addEventListener("click", function(event) {
+      event.preventDefault();
+      fetch(this.href, {
+          method: "GET",
+          headers: {
+            "Accept": "application/json"
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Update the DOM with the events data
+          const perUserListContainer = document.querySelector(".per-user-list-container");
+          const globalListContainer = document.querySelector(".global-list-container");
+          const perUserListEmptyContainer = document.querySelector(".per-user-list-empty");
+          globalListContainer.style.display = 'none';
+          perUserListContainer.innerHTML = "";
+          data.forEach(event => {
+            if (data.length = 0) {
+              perUserListEmptyContainer.style.display = 'block';
+              const eventElement = document.createElement("li");
+            }
+            const eventElement = document.createElement("li");
+            eventElement.innerHTML = `${event.title} - ${event.date} <a href='/events/${event.id}'>Voir le détail de l'événement</a>`;
+            perUserListContainer.appendChild(eventElement);
+          });
+        })
+        .catch(error => console.error("Error:", error));
+    });
+  });
+</script>
+<style>
+  .per-user-list-empty {
+    display: none;
+  }
+</style>

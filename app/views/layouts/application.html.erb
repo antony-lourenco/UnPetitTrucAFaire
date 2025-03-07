@@ -19,11 +19,14 @@
 </head>
 
 <body>
-
   <nav class="header-nav-container">
     <div class="header-nav">
+      <%= link_to "home", root_path, class: "neutral"%>
       <%if current_user%>
       Bienvenue titulaire de l'email : <strong><%= current_user.email %></strong> !
+      <% if request.path === "/" %>
+      <%= link_to "Voir mes événements uniquement", api_v1_user_events_path(current_user.id), data: { turbo_method: :get }, class: "neutral" %>
+      <%end%>
       <%else%>
       Pas connecté, clique sur "Login"
       <%end%>
