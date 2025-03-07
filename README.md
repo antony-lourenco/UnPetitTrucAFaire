@@ -35,7 +35,7 @@ J’ai un peu galéré a finaliser l’authentification parce que dans l’énon
 
 Le password est encrypter cela dit.J’ai aussi eu un soucis de versioning de ruby pour implémenter un SaaS et importer bootstrap, Ca m’a pris la tete alors j’ai décidé de faire tout a la Mano avec du css à la volée. Le résultat…est… ce qu’il est, pas dingue visuellement mais je me suis dit que c’était pas le but de l’exercice. :) 
 
-Pour le reste, le CRUD fonctionne, la validation est en place, JWT aussi  via devise-jwt. J’ai mis une mini requête API GET histoire de. Si tu as déjà un User de créé, tu peux curl -X GET http://localhost:3000/api/v1/users/[:id]/events -H "Authorization: Bearer <JWT_TOKEN>”. 
+Pour le reste, le CRUD fonctionne, la validation est en place, JWT aussi  via devise-jwt. J’ai mis une mini requête API GET histoire de, tu peux donc cliquer sur "Voir mes événements uniquement" pour voir uniquement les événments que l'utilisateur connecté a créé.
 
 Pour chopper tous évènements rattaché a ce user. Je l’ai pas mis dans l’interface parce que je voyais pas trop l’intérêt a ce stade a moins que veuille vraiment se lancer dans le Business avec cette super appli :D
 Ya pas vraiment de grosse requêtes à faire donc pour les query N+1 queries je sais pas si ca a un réel intérêt mais rassures toi, je vois de quoi il s’agit.
