@@ -1,0 +1,9 @@
+<nav class="d-flex justify-end align-center fixed">
+  <%= link_to "New Event", new_event_path %>
+</nav>
+<div class=container>
+  <h1>Events for User:</h1>
+  <% @events.each do |event|%>
+  <%= event.title %><%= link_to "See Event", event %>
+  <%end%>
+</div>

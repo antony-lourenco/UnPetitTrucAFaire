@@ -1,0 +1,9 @@
+<div>
+  <%= @event.title %>
+  <%= @event.description %>
+  <%= @event.date %>
+  <%= @event.location %>
+  <%= link_to "Back", events_path %>
+  <%= button_to "Delete", @event, method: :delete %>
+  <%= link_to "Edit", edit_article_path(@event.id)%>
+</div>
