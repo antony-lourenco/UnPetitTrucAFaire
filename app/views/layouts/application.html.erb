@@ -19,16 +19,15 @@
 </head>
 
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+
+  <nav class="header-nav">
+    <div class="alerts-container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <%= link_to "New Event", new_event_path %>
+  </nav>
   <%= yield %>
 </body>
 
 </html>
-
-<style>
-  body {
-    background: black;
-    color: lightgrey;
-  }
-</style>
