@@ -4,7 +4,7 @@ pour un usage local de ce merveilleux petittrucafaire
 
 1 - lancer bundle install
 
-2 - Modifier database.yml
+2 - Modifier database.yml (optionel)
 
 development:
   adapter: postgresql
