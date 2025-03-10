@@ -48,17 +48,33 @@
             const perUserListContainer = document.querySelector(".per-user-list-container");
             const globalListContainer = document.querySelector(".global-list-container");
             const perUserListEmptyContainer = document.querySelector(".per-user-list-empty");
+            const paginationContainer = document.querySelector(".pagination");
+
             globalListContainer.style.display = 'none';
             perUserListContainer.innerHTML = "";
-            data.forEach(event => {
-              if (data.length = 0) {
-                perUserListEmptyContainer.style.display = 'block';
+
+            if (data.events.length === 0) {
+              perUserListEmptyContainer.style.display = 'block';
+            } else {
+              perUserListEmptyContainer.style.display = 'none';
+              data.events.forEach(event => {
                 const eventElement = document.createElement("li");
+                eventElement.innerHTML = `${event.title} - ${event.date} <a href='/events/${event.id}'>Voir le détail de l'événement</a>`;
+                perUserListContainer.appendChild(eventElement);
+              });
+            }
+
+            const per_page = 5;
+
+            // Update pagination links
+            paginationContainer.innerHTML = "Pagination:<br>";
+            for (let page = 1; page <= data.total_pages; page++) {
+              if (page === data.current_page) {
+                paginationContainer.innerHTML += `<strong>${page}</strong> `;
+              } else {
+                paginationContainer.innerHTML += `<a href="/events?page=${page}&per_page=${per_page}" class="pagination-link">${page}</a> `;
               }
-              const eventElement = document.createElement("li");
-              eventElement.innerHTML = `${event.title} - ${event.date} <a href='/events/${event.id}'>Voir le détail de l'événement</a>`;
-              perUserListContainer.appendChild(eventElement);
-            });
+            }
           })
           .catch(error => console.error("Error:", error));
       });
