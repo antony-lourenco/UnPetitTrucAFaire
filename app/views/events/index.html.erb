@@ -16,38 +16,53 @@
   Aucun évenements
   clique sur "Créer un événement" ou "Login" pour en créer.
   <%end%>
+  <div class="pagination">
+    Pagination:<br>
+    <% if @total_pages > 1 %>
+    <% (1..@total_pages).each do |page| %>
+    <% if page == page_no %>
+    <strong><%= page %></strong>
+    <% else %>
+    <%= link_to page, events_path(page: page, per_page: per_page), class: "pagination-link" %>
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
 </div>
 
 <script>
   document.addEventListener("turbo:load", function() {
-    document.querySelector("[data-turbo-method='get']").addEventListener("click", function(event) {
-      event.preventDefault();
-      fetch(this.href, {
-          method: "GET",
-          headers: {
-            "Accept": "application/json"
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          // Update the DOM with the events data
-          const perUserListContainer = document.querySelector(".per-user-list-container");
-          const globalListContainer = document.querySelector(".global-list-container");
-          const perUserListEmptyContainer = document.querySelector(".per-user-list-empty");
-          globalListContainer.style.display = 'none';
-          perUserListContainer.innerHTML = "";
-          data.forEach(event => {
-            if (data.length = 0) {
-              perUserListEmptyContainer.style.display = 'block';
-              const eventElement = document.createElement("li");
+    const theEvent = document.querySelector("[data-turbo-method='get']");
+    if (theEvent) {
+      theEvent.addEventListener("click", function(event) {
+        event.preventDefault();
+        fetch(this.href, {
+            method: "GET",
+            headers: {
+              "Accept": "application/json"
             }
-            const eventElement = document.createElement("li");
-            eventElement.innerHTML = `${event.title} - ${event.date} <a href='/events/${event.id}'>Voir le détail de l'événement</a>`;
-            perUserListContainer.appendChild(eventElement);
-          });
-        })
-        .catch(error => console.error("Error:", error));
-    });
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Update the DOM with the events data
+            const perUserListContainer = document.querySelector(".per-user-list-container");
+            const globalListContainer = document.querySelector(".global-list-container");
+            const perUserListEmptyContainer = document.querySelector(".per-user-list-empty");
+            globalListContainer.style.display = 'none';
+            perUserListContainer.innerHTML = "";
+            data.forEach(event => {
+              if (data.length = 0) {
+                perUserListEmptyContainer.style.display = 'block';
+                const eventElement = document.createElement("li");
+              }
+              const eventElement = document.createElement("li");
+              eventElement.innerHTML = `${event.title} - ${event.date} <a href='/events/${event.id}'>Voir le détail de l'événement</a>`;
+              perUserListContainer.appendChild(eventElement);
+            });
+          })
+          .catch(error => console.error("Error:", error));
+      });
+    }
   });
 </script>
 <style>

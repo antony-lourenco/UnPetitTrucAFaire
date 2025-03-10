@@ -2,9 +2,13 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: %i[index] # on laisse les gens voir un ptit peu quoi
   before_action :set_event, only: %i[show edit update destroy]
+  include Pagination
+  helper_method :page_no, :per_page, :paginate_offset
 
   def index
     @events = Event.all
+    @events = @events.limit(per_page).offset(paginate_offset)
+    @total_pages = (Event.count.to_f / per_page).ceil
   end
 
   def show; end

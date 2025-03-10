@@ -90,3 +90,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
+.pagination .pagination-link {
+  min-width: 20px;
+}
