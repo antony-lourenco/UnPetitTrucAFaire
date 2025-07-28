@@ -32,7 +32,7 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # PostgreSQL gem
-gem "pg", "~> 1.4"
+gem "pg", "~> 1.6"
 
 # Devise gem
 gem "devise"
